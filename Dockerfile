@@ -1,11 +1,9 @@
-FROM centos:latest
-RUN yum install -y httpd \
-zip \
-unzip
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
-WORKDIR /var/www/html/
+FROM nginx:alpine
+RUN yum install -y zip
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /usr/share/nginx/html/
+WORKDIR /usr/share/nginx/html/
 RUN unzip photogenic.zip
 RUN cp -rvf photogenic/* .
 EXPOSE 80 22
 RUN rm -rf photogenic photogenic.zip
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+CMD ["nginx", "-g", "daemon off;"]
