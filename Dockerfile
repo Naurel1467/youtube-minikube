@@ -1,5 +1,5 @@
 FROM nginx:alpine
-RUN yum install -y zip
+RUN apk install -y zip
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /usr/share/nginx/html/
 WORKDIR /usr/share/nginx/html/
 RUN unzip photogenic.zip
