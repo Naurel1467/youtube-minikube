@@ -26,4 +26,16 @@ node {
         
         }
     }
+    stage("pushing docker to docker hub") {
+        sshagent(['ad3e390f-6537-4f11-8e2d-f7de4ea92887']) {
+        withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_pass')]) {
+            sh "sudo docker login naurel1467 -p ${docker_pass}"
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@34.229.159.252 sudo docker push naurel1467/$JOB_NAME:v1.$BUILD_ID'
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@34.229.159.252 sudo docker push naurel1467/$JOB_NAME:latest'
+        }
+    // some block
+    }
+        
+
+    
 }

@@ -1,0 +1,5 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: create a new deployment
+      command: kubectl apply -f .
